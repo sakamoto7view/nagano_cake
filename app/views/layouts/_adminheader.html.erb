@@ -1,0 +1,80 @@
+<html>
+  <head>
+    <title>Nagano_CAKE</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+  </head>
+  
+  
+  
+  <body>
+    
+    <% if flash[:notice] %>
+      <div class="notihication is-info">
+        <p class="notice"><%= notice %></p>
+      </div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="notihication is-danger">
+        <p class="alert"><%= alert %></p>
+      </div>
+    <% end %>
+
+  <div class="header">
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-3">
+            <h2 class="navbar-header">LOGO</h2>
+          </div>
+          <div class="col-xs-9">
+            <div id="slidemenu">
+              <ul class="nav navbar-nav navbar-right" data-hover="dropdown" data-animations="zoomIn fadeIn fadeInUp fadeIn">
+                <% if admin_signed_in? %>
+                  <li class="">
+                      <%= link_to "商品一覧", admin_items_path, class: "navbar-item button is-warning is-light" %>
+                  </li>
+                  <li class="">
+                  <li class="">
+                      <%= link_to "会員一覧", admin_customers_path, class: "navbar-item button is-warning is-light" %>
+                  </li>
+                  <li class="">
+                      <%= link_to "注文履歴一覧", admin_orders_path, class: "navbar-item button is-warning is-light" %>
+                  </li>
+                  <li class="">
+                      <%= link_to "ジャンル一覧", admin_genres_path, class: "navbar-item button is-warning is-light" %>
+                  </li>
+                  <li class="">
+                      <%= link_to "ログアウト", admin_sign_out_path, method: :destroy, class: "navbar-item button is-warning is-light" %>
+                  </li>
+                <% else %>
+                  <li class="">
+                      <%= link_to 'About', about_path, class: "navbar-item button is-warning is-light" %>
+                  </li>
+                  <li class="">
+                      <%= link_to "商品一覧", items_path, class: "navbar-item button is-warning is-light" %>
+                  </li>
+                  <li class="">
+                    　<%= link_to "新規登録", new_customer_registration_path, class: "navbar-item button is-warning is-light" %>
+                  </li>
+                  <li class="">
+                      <%= link_to "ログイン", new_customer_session_path, class: "navbar-item button is-warning is-light" %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+    
+  <%= yield %>
+    <footer class="footer">
+    </footer>
+  </body>
+</html>

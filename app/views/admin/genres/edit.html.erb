@@ -1,0 +1,37 @@
+<%= render "layouts/adminheader" %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2">
+      <div style="background-color:#EAEEEF; width:180px; padding:1px">
+        <div class="text-center">
+         <p>ジャンル編集</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-10">
+    </div>
+  </div>
+
+  <%= form_with model:@genre, url:admin_genre_path(@genre.id), local:true, method: :patch do |f| %> <!-- https://hirocorpblog.com/post-319/ -->
+  	<div class="form-group">
+  	  <div class="row">
+        <label class="col-lg-1 control-label" for="name">ジャンル</label>
+        <div class="col-lg-2">
+          <%= f.text_field :name, autofocus: true %>
+        </div>
+        <div class="col-lg-2">
+          <%= f.radio_button :is_active, :true %> <!--https://techacademy.jp/magazine/22208 -->
+          <%= f.label :is_active, "有効", {value: :true, style: "display: inline-block;"} %>
+          <%= f.radio_button :is_active, :false %>
+          <%= f.label :is_active, "無効", {value: :false, style: "display: inline-block;"} %>
+        </div>
+        <div class="col-lg-2">
+          <div class="Update">
+            <%= f.submit "変更を保存する", class: "btn btn-primary submit" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

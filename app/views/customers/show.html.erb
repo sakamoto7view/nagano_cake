@@ -1,0 +1,94 @@
+ <%= render "layouts/header" %>
+
+<div class="container">  <!-- この行を追加 -->
+  <div class="row">      <!-- この行を追加 -->
+    <div class="col-lg-6">
+      <div style="background-color:#EAEEEF; width:180px; padding:5px" >
+        <div class="text-center">
+          <h4>マイページ</h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+    </div>
+  </div>
+    
+  <div class="row">
+    <div class="session_info">
+      <div class="col-lg-2">
+        <h4>登録情報</h4>
+      </div>
+      <div class="col-lg-1">
+        <%= link_to  edit_customer_path(@customer.id) do %>
+          <button class="btn btn-info">編集する</button>
+        <% end %>
+      </div>
+      <div class="col-lg-2">
+        <%= link_to  edit_customer_registration_path(@customer.id) do %> <!-- https://qiita.com/anraku/items/3d7d675925de81b825d4, https://qiita.com/katryo/items/b3ee01758bbe72fb764d -->
+          <button class="btn btn-info">パスワードを変更する</button>
+        <% end %>
+      </div>
+      <div class="col-lg-7">
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-bordered">
+    <tbody>
+  		<tr>
+  			<th>氏名</th>
+  			<td><%= @customer.last_name %> <%= @customer.first_name %></td>
+  		</tr>
+  		<tr>
+  			<th>カナ</th>
+  			<td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
+  		</tr>
+  		<tr>
+  			<th>郵便番号</th>
+  			<td><%= @customer.postal_code %></td>
+  		</tr>
+  		<tr>
+  			<th>住所</th>
+  			<td><%= @customer.address %></td>
+  		</tr>
+  		<tr>
+  			<th>電話番号</th>
+        <td><%= @customer.telephone_number %></td>
+  		</tr>
+  		<tr>
+  			<th>メールアドレス</th>
+  			<td><%= @customer.email %></td>
+  		</tr>
+  	</tbody>
+  </table>
+      
+  <div class="row">
+    <div class="col-lg-1">
+      <div class="address_index">
+        <h4>配送先</h4>
+      </div>
+    </div>
+    <div class="col-lg-2">
+      <%= link_to  addresses_path do %>
+        <button class="btn btn-info">一覧を見る</button>
+      <% end %>
+    </div>
+    <div class="col-lg-9">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-1">
+      <div class="order_index">
+        <h4>注文履歴</h4>
+      </div>
+    </div>
+    <div class="col-lg-2">
+        <%= link_to  orders_path do %>
+          <button class="btn btn-info">一覧を見る</button>
+        <% end %>
+      </div>
+      <div class="col-lg-9">
+      </div>
+    </div>
+  </div>
+</div>

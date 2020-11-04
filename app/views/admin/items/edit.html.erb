@@ -1,0 +1,89 @@
+<%= render "layouts/adminheader" %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2">
+      <div style="background-color:#EAEEEF; width:150px; padding:1px">
+        <div class="text-center">
+          <h4>商品編集</h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-10">
+    </div>
+  </div>
+
+      <!-- %= attachment_image_tag , :@item_image, format: 'jpeg', fallback: "no_image.jpg", size: "50x50" % -->
+
+  <%= form_with model:@item, url:admin_item_path(@item.id), local: true, method: :patch do |f| %>
+    <div class="row">
+      <div class="form-group">
+        <label class="col-lg-3 control-label" for="image">
+          <%= f.attachment_field :image %>
+        </label>  
+      </div>
+      <div class="col-lg-9">
+        <div class="row">
+      	  <div class="form-group">
+            <label class="col-lg-2 control-label" for="name">商品名</label>
+            <div class="col-lg-4">
+              <%= f.text_field :name, autofocus: true %>
+            </div>
+            <div class="col-lg-6">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label class="col-lg-2 control-label" for="introduction">商品説明</label>
+            <div class="col-lg-4">
+              <%= f.text_area :introduction, autofocus: true %>
+            </div>
+            <div class="col-lg-6">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label class="col-lg-2 control-label" for="genre">ジャンル</label>
+            <div class="col-lg-4">
+              <%= f.collection_select :genre_id, Genre.where(is_active: true), :id, :name %>  <!-- https://qiita.com/colorrabbit/items/b58888506e41d1370fd1 -->
+            </div>
+            <div class="col-lg-6">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label class="col-lg-2 control-label" for="name">税抜価格</label>
+            <div class="col-lg-4">
+              <%= f.text_field :price, autofocus: true %>円
+            </div>
+            <div class="col-lg-6">
+            </div>
+          </div>
+        </div>
+        <div class="row"> 
+          <div class="form-group">
+            <label class="col-lg-2 control-label" for="name">販売ステータス</label>
+            <div class="col-lg-10">
+              <%= f.select :is_active, {販売中:true, 販売停止:false} %> <!-- https://qiita.com/colorrabbit/items/b58888506e41d1370fd1 -->
+            </div>
+            <div class="col-lg-6">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-10">
+      </div>
+      <div class="col-lg-2">
+        <div class="actions">
+          <%= f.submit "変更を保存" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+

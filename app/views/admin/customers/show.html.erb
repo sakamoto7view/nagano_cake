@@ -1,0 +1,120 @@
+<%= render "layouts/adminheader" %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2">
+      <div style="background-color:#EAEEEF; width:240px; padding:1">
+        <div class="text-center">
+          <h4><%= @customer.last_name %><%= @customer.first_name %>さんの会員詳細</h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-10">
+    </div>
+  </div>
+   
+  
+  <form class="form-horizontal">
+    <div class="row">
+    	<div class="form-group">
+        <div class="col-lg-1">
+          <label class="control-label" for="customer_id">顧客ID</label>
+        </div>
+        <div class="col-lg-2">
+          <%= @customer.id %> <!-- %= @customer.is_deleted % -->
+        </div>
+        <div class="col-lg-9">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <div class="col-lg-1">
+          <label class="control-label" for="customer_name">氏名</label>
+        </div>
+        <div class="col-lg-2">
+          <%= @customer.last_name %> <%= @customer.first_name %>
+        </div>
+        <div class="col-lg-9">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <div class="col-lg-1">
+          <label class="control-label" for="customer_name_kana">フリガナ</label>
+        </div>
+        <div class="col-lg-2">
+          <%= @customer.last_name_kana %> <%= @customer.first_name_kana %>
+        </div>
+        <div class="col-lg-9">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <div class="col-lg-1">
+          <label class="control-label" for="customer_postal_code">郵便番号</label>
+        </div>
+        <div class="col-lg-2">
+            <%= @customer.postal_code %>
+        </div>
+        <div class="col-lg-9">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <div class="col-lg-1">
+          <label class="control-label" for="customer_address">住所</label>
+        </div>
+        <div class="col-lg-2">
+          <%= @customer.address %>
+        </div>
+        <div class="col-lg-9">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <div class="col-lg-1">
+          <label class="control-label" for="customer_telephone_number">電話番号</label>
+        </div>
+        <div class="col-lg-2">
+          <%= @customer.telephone_number %>
+        </div>
+        <div class="col-lg-9">
+        </div>
+      </div>
+    </div>
+    <div class="row"> 
+      <div class="form-group">
+        <div class="col-lg-1">
+          <label class="control-label" for="customer_email">メールアドレス</label>
+        </div>
+        <div class="col-lg-2">
+          <%= @customer.email %>
+        </div>
+        <div class="col-lg-9">
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="form-group">
+        <div class="col-lg-1">
+          <%= link_to edit_admin_customer_path(@customer) do %>
+  				  <span class="btn btn-info" style="display:inline-block;">編集する</span>
+  	      <% end %>
+  	    </div>
+  	    <div class="col-lg-1">
+          <%= link_to admin_order_path(@customer) do %>
+					  <span class="btn btn-success" style="display:inline-block;">注文一覧</span>
+		      <% end %>
+        </div>
+        <div class="col-lg-10">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

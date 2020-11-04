@@ -1,0 +1,62 @@
+<%= render "layouts/adminheader" %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2">
+      <div style="background-color:#EAEEEF; width:140px; padding:1">
+        <div class="text-center">
+           <h4>商品詳細</h4>
+         </div>
+      </div>
+    </div>
+    <div class="col-lg-10">
+    </div>
+  </div>
+  
+  
+  <form class="form-horizontal">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="form-group">
+          <label class="control-label" for="item_name"></label>
+            <%= attachment_image_tag @item, :image, :fill, 300, 300, format: 'jpeg' %>
+        </div>
+      </div>
+      <div class="col-lg-4">
+      	<div class="form-group">
+          <label class="control-label" for="item_name">商品名</label>
+            <%= @item.name %>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="item_introduction">商品説明</label>
+            <%= @item.introduction %>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="item_genre">ジャンル</label>
+            <%= @item.genre_id %>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="item_price">税込価格（税抜価格）</label>
+            <%= ((@item.price * 1.1).round(2)).ceil %>（<%= @item.price %>）円
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="item_status">販売ステータス</label>
+            <%= @item.is_active %>
+        </div>
+      </div>
+      <div class="col-lg-4">
+      </div>
+    </div>
+  </form>
+
+  <div class="row">
+    <div class="col-lg-9">
+    </div>
+    <div class="col-lg-3">
+      <%= link_to edit_admin_item_path(@item) do  %>
+        <p>編集する</p>
+      <% end %>
+    </div>
+  </div>
+
+</div>

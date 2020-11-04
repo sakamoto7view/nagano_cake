@@ -1,0 +1,76 @@
+ <%= render "layouts/header" %>
+
+<section class="hero is-success">
+  <div class="hero-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-2">
+          <div class="genre_style">
+            <div class="genre_title">
+              <h4>ジャンル検索</h4>
+            </div>
+            <if genre.status == true>
+            <div class="genre_contents">
+              <% @genres.each do |genre| %> <!-- https://web-camp.io/magazine/archives/18333 -->
+                <div class="genre-list">
+                  <%= link_to root_path(genre: genre.id) do %>
+                    <%= genre.name %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        
+    <div class="col-lg-10">
+      <div class="row">
+        <div class="col-lg-9">
+              <h4 class="text-center">
+              ようこそ、NaganoCakeへ！<br>
+              このサイトは、ケーキ販売のECサイトになります。<br>
+              会員でない方も商品の閲覧はできますが、<br>
+              購入には会員登録が必要になります。
+              </h4>
+        </div>
+        <div class="col-lg-3">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3">
+          <h3><strong>オススメ商品</strong></h3>
+        </div>
+        <div class="col-lg-9">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <section class="section">
+            <div class="list-wrap">
+                  <% @items.each do |item| %>
+                    <div class="item-box">
+                      <%= link_to item_path(item) do %>
+                        <%= attachment_image_tag item, :image, :fill, 150, 110, format: 'jpeg' %>
+                      <% end %>
+                        <div class="name">
+                          <span class="item-name"><strong>商品名</strong>　<%= item.name %></span>
+                        </div>
+                        <div class="price">
+                          <span class="item-price"><strong>￥</strong>　<%= item.price %></span>
+                        </div>
+                    </div>
+                  <% end %>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-10">
+        </div>
+        <div class="col-lg-2">
+          <%= link_to "もっと見る＞", items_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>  
+      

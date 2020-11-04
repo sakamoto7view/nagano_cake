@@ -1,0 +1,101 @@
+<div class="header">
+ <%= render "layouts/header" %>
+</div>
+
+<div class="container">  <!-- この行を追加 -->
+  <div class="row"> 
+    <div class="col-lg-1">
+    </div>
+    <div class="col-lg-3">
+      <div style="background-color:#EAEEEF; width:220px; padding:0px"> <!-- https://qiita.com/matcham/items/3609e72360491543b1b6 -->
+        <div class="text-center">
+          <h5>会員の方はこちらからログイン</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8">
+    </div>
+  </div>
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    
+   
+    <form class="form-horizontal">
+      <div class="form-group">
+  	    <div class="row">
+          <div class="col-lg-2">
+          </div>
+          <label class="col-lg-2 control-label" for="email">メールアドレス</label>
+          <div class="col-lg-6">
+            <%= f.text_field :email, autofocus: true, :size => "30*30" %>
+          </div>
+          <div class="col-lg-3">
+          </div>
+        </div>
+      </div>
+  
+      
+      <div class="form-group">
+        <div class="row">
+          <div class="col-lg-2">
+          </div>
+          <label class="col-lg-2 control-label" for="password_1">パスワード</label>
+          <div class="col-lg-6">
+            <%= f.password_field :password, autocomplete: "current-password", :size => "60*30" %>
+          </div>
+          <div class="col-lg-2">
+          </div>
+        </div>
+      </div>
+           
+      <div class="row">
+        <div class="col-lg-7">
+        </div>
+        <div class="col-lg-3">
+          <%= render "devise/shared/links" %> <!-- https://qiita.com/kentalpsw/items/2b33f58b7f3ebab06070 -->
+        </div>
+        <div class="col-lg-2">
+        </div>
+  
+      <div class="row">
+        <div class="col-lg-5">
+        </div>
+        <div class="col-lg-2">
+          <div class="actions">
+            <%= f.submit "ログイン" %>
+          </div>
+        </div>
+        <div class="col-lg-5">
+        </div>
+      </div>
+    </form>
+    
+  <% end %>
+
+
+    <div class="row"> 
+      <div class="col-lg-1">
+      </div>
+      <div class="col-lg-3">
+        <h5 style="background-color:#EAEEEF; width:180px; padding:1px">
+         <div class="text-center">
+           登録がお済みでない方
+         </div>
+        </h5>
+      </div>
+      <div class="col-lg-8">
+      </div>
+    </div>
+    
+    <div class="row"> 
+      <div class="col-lg-2">
+      </div>
+      <div class="col-lg-4">
+        <%= link_to "こちら", new_customer_registration_path %>から新規登録を行ってください。
+      </div>
+      <div class="col-lg-6">
+      </div>
+    </div>
+</div>
+
+

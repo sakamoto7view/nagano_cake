@@ -1,0 +1,111 @@
+ <%= render "layouts/header" %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-1">
+    </div>
+    <div class="col-lg-2">
+      <div style="background-color:#EAEEEF; width:150px; padding:0.1px" >
+        <div class="text-center">
+          <h5>登録情報編集</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-7">
+    </div>
+  </div>
+
+
+  <%= form_with model:@customer, local:true, method: :patch do |f| %>
+    <form class="form-horizontal">
+    	<div class="form-group">
+    	  <div class="row">
+          <label class="col-lg-2 control-label" for="name">名前</label>
+          <div class="col-lg-3">
+            <%= f.label :last_name,"(姓)" %> <%= f.text_field :last_name, autofocus: true %>
+          </div>
+          <div class="col-lg-3">
+            <%= f.label :first_name,"(名)" %> <%= f.text_field :first_name, autofocus: true %>
+          </div>
+          <div class="col-lg-4">
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="row">
+          <label class="col-lg-2 control-label" for="name_kana">フリガナ</label>
+          <div class="col-lg-3">
+            <%= f.label :last_name_kana,"(セイ)" %> <%= f.text_field :last_name_kana, autofocus: true %>
+          </div>
+          <div class="col-lg-3">
+            <%= f.label :first_name_kana,"(メイ)" %> <%= f.text_field :first_name_kana, autofocus: true %>
+          </div>
+          <div class="col-lg-4">
+          </div>
+        </div>
+      </div>
+    
+      <div class="form-group">
+        <div class="row">
+          <label class="col-sm-2 control-label" for="email">メールアドレス</label>
+          <div class="col-sm-3">
+            <%= f.text_field :email, autofocus: true, autocomplete: "email" %>
+          </div>
+          <div class="col-lg-7">
+          </div>
+        </div>
+      </div>
+    
+      <div class="form-group">
+        <div class="row">
+          <label class="col-lg-2 control-label" for="postcode">郵便番号(ハイフンなし)</label>
+          <div class="col-lg-3">
+            <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %>
+          </div>
+          <div class="col-lg-7">
+          </div>
+        </div>
+      </div>
+    
+      <div class="form-group">
+        <div class="row">
+          <label class="col-lg-2 control-label" for="address">住所</label>
+          <div class="col-lg-10">
+             <%= f.text_field :address, autofocus: true, autocomplete: "address" %>
+          </div>
+          <div class="col-lg-7">
+          </div>
+        </div>
+      </div>
+    
+      <div class="form-group">
+        <div class="row">
+          <label class="col-lg-2 control-label" for="phone_number">電話番号(ハイフンなし)</label>
+          <div class="col-lg-5">
+            <%= f.number_field :telephone_number, autofocus: true, autocomplete: "telephone_number" %>
+          </div>
+          <div class="col-lg-7">
+          </div>
+        </div>
+      </div>
+    
+      <div class="row">
+        <div class="col-lg-2">
+        </div>
+        <div class="col-lg-4">
+          <div class="Update">
+            <%= f.submit "編集内容を保存する" %>
+          </div>
+        </div>
+      <% end %>
+        <div class="col-lg-6">
+          <div class="withdrawl"> <!-- https://qiita.com/tt_tsutsumi/items/588d0e65a289a15530d2 -->
+            <%= link_to "退会する", "/customers/:id/unsubscribe" %>
+          </div>
+        </div>
+      </div>
+    </form>
+  
+  
+</div>

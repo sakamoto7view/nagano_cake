@@ -1,0 +1,104 @@
+<%= render "layouts/adminheader" %>
+
+  <div class="row" style="width:60%; margin:0 auto;">
+	<h4 style="margin-bottom: 20px; border-left: 2px solid #2D6F4C; padding: 10px;">注文詳細画面</h4>
+	<table class="table table-bordered">
+	  <tr>
+		<th>購入者</th>
+		<td><%= link_to  admin_customer_path(@order.id) do %>
+	  			<%= @order.customer.last_name %>
+	  			<%= @order.customer.first_name %>
+				<% end %>
+	    </td>
+	  </tr>
+	  <tr>
+		<th>配送先</th>
+		<td><%= @order.postal_code %>
+				<%= @order.address %>
+				<br>
+				<%= @order.name %>
+		</td>
+	  </tr>
+
+	  <tr>
+		<th>支払方法</th>
+		<td><%= @order.payment_method %></td>
+	  </tr>
+	  <tr>
+		<th>注文ステータス</th>
+		<td>
+			<%= form_with model:@order, url:admin_order_path(@order.id), local:true, method: :patch do |f| %>
+			  <%= f.select :status, [["入金待ち","入金待ち"], ["入金確認","入金確認"], ["製作中","製作中"], ["発送準備中","発送準備中"], ["発送済み","発送済み"]] %>
+			  <div class="Update">
+		      <%= f.submit "変更" %>
+		    </div>
+			<% end %>
+		</td>
+	  </tr>
+	</table>
+
+<%#= form_with model:@order, url: admin_order_path(@order.id), method: :patch, local: true do |f| %>
+	  <%#= f.fields_for :order_details do |i| %>
+	<table class="table table-bordered">
+	  <tr>
+			<th>商品名</th>
+			<th>単価(税込)</th>
+			<th>数量</th>
+			<th>小計</th>
+			<th>製作ステータス</th>
+			<th></th>
+	  </tr>
+
+    <% @order.order_details.each do |order_detail| %>
+	  <tr>
+	    <td><%= order_detail.item.name %></td>
+			<td><%= (order_detail.item.price * 1.1).round %></td>
+			<td><%= order_detail.amount %></td>
+		  <td><%= ((order_detail.item.price * order_detail.amount * 1.1).round(2)).ceil %>円</td>
+		  <td>
+		  	<%= form_with model: order_detail, url: admin_order_order_detail_path(@order.id, order_detail.id), local: true, method: :patch do |f| %>
+		  	<%#= form_with model:@order_detail, url: admin_order_path(@order.id), method: :patch, local: true do |f| %>
+	        <%#= f.fields_for :order_details do |i| %>
+			  	  <%#= f.select :making_status, OrderDetail.making_statuses.keys.map[|k| k] %>
+			  	  <%= f.select :making_status, OrderDetail.making_statuses.keys.to_a, {} %>
+			  	  <%#= f.select :making_status, [["製作不可","製作不可"], ["製作待ち","製作待ち"], ["製作中","製作中"], ["製作完了","製作完了"]] %>
+			      <%= f.submit '更新', class:"btn btn-success" %>
+			    <%# end %>
+			  <% end %>
+		  </td>
+		</tr>
+		      <%#= i.select :status, OrdereDetail.item_statuses.keys.map{ |l| l } %>
+						<%# case i.object.product_status when "製作待ち" %>
+								<!-- span class="badge" style="background: red;"><%#= i.object.product_status %></span -->
+								<%# when "製作中" %>
+									<!-- span class="badge" style="background: green;"><%#= i.object.product_status %></span -->
+								<%# when "製作完了" %>
+									<!-- span class="badge" style="background: blue;"><%#= i.object.product_status %></span -->
+								<%# end %>
+	  <% end %>
+	</table>
+
+
+	<table class="table table-bordered">
+		<tr>
+			<th>商品合計</th>
+			<td>
+      	<% @sum = 0 %>
+        <% @order.order_details.each do |order_detail| %>
+	      <% @sum += order_detail.pay %>
+        <% end %>
+        <%= ((@sum * 1.1).round(2)).ceil %>
+        円
+      </td>
+     </tr>
+     <tr>
+			<th>配送料</th>
+			<td>500円</td>
+		</tr>
+		<tr>
+			<th>請求金額合計</th>
+			<td><%= (((@sum * 1.1).round(2)).ceil) + 500 %>円</td>
+	  </tr>
+	</table>
+</div>
+

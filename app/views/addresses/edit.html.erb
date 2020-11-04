@@ -1,0 +1,66 @@
+ <%= render "layouts/header" %>
+
+<div class="container"> 
+  <h5><!-- %= render 'users/profile', user: @user, book: @book % --></h5>
+  <div class="row"> 
+    <div class="col-lg-2">
+      <div style="background-color:#EAEEEF; width:140px; padding:0px" >
+        <div class="text-center">
+　        <h5>配送先編集</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-10">
+    </div>
+  </div>
+    
+    <%= form_with model:@address, url:"/addresses/#{@address.id}", local:true, method: :patch do |f| %>
+      <form class="form-horizontal">
+      	<div class="form-group">
+      	  <div class="row"> 
+            <label class="col-lg-2 control-label" for="postal_code">郵便番号(ハイフンなし)</label>
+            <div class="col-lg-2">
+              <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code"  %>
+            </div>
+            <div class="col-lg-8">
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <div class="row">
+            <label class="col-lg-2 control-label" for="address">住所</label>
+            <div class="col-lg-5">
+              <%= f.text_field :address, autofocus: true, autocomplete: "address"  %>
+            </div>
+            <div class="col-lg-5">
+            </div>
+          </div>
+        </div>
+      
+        <div class="form-group">
+          <div class="row">
+            <label class="col-lg-2 control-label" for="name">宛名</label>
+            <div class="col-lg-2">
+              <%= f.text_field :name, autofocus: true, autocomplete: "name"  %>
+            </div>
+            <div class="col-lg-8">
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-lg-8">
+            </div>
+            <div class="form-group">
+              <div class="col-lg-3">
+                <div class="Update">
+                  <%= f.submit "編集する" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+
+<%= render "layouts/adminheader" %>
+
+<div class="row" style="width: 90%; margin: 20px auto;">
+	<h1>
+  	<span>本日の注文件数　　　</span>
+   		<%=link_to admin_orders_path(day: 1) do%>
+  			<%= @count %>
+  		<% end %>
+  	<span>件</span>
+	</h1>
+</div>

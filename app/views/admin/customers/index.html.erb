@@ -1,0 +1,44 @@
+  <%= render "layouts/adminheader" %>
+  
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2">
+      <div style="background-color:#EAEEEF; width:140px; padding:1">
+        <div class="text-center">
+          <h4>会員一覧</h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-10">
+    </div>
+  </div>
+        
+        
+
+<table class="table">
+	<tr>
+		<th>顧客ID</th>
+		<th>氏名</th>
+		<th>フリガナ</th>
+		<th>メールアドレス</th>
+		<th>ステータス</th>
+	</tr>
+	<% @customers.each do |customer| %>
+	<tr>
+		<td><%= customer.id %></td>
+		<td>
+			<%= link_to admin_customer_path(customer) do %>
+				<%= customer.last_name %> <%= customer.first_name %>
+			<% end %>
+		</td>
+		<td><%= customer.last_name_kana %> <%= customer.first_name_kana %></td>
+		<td><%= customer.email %></td>
+		<% if customer.is_deleted == "Available" %>
+			<td><span class="badge" style="background:green">会員</span></td>
+		<% else %>
+			<td><span class="badge" style="background:red">退会済み</span></td>
+		<% end %>
+	</tr>
+	<% end %>
+</table>
+</div>

@@ -1,0 +1,127 @@
+ <%= render "layouts/header" %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2">
+    	<div style="background-color:#EAEEEF; width:200px; padding:0px">
+        <div class="text-center">
+          <h4>購入情報入力</h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-10">
+    </div>
+  </div>
+
+
+  <%= form_with model: @order, url: order_confirm_path, local: true, method: :get do |f| %>
+    <%= f.hidden_field :customer_id %> <!-- フォームで情報を入力しつつ、customer_idを@orderに渡す https://sakurawi.hateblo.jp/entry/hidden_field-->
+    <div class="form-group">
+      <div class="row">
+      	<label class="col-lg-2 control-label" for="payment_method"><strong>支払方法</strong></label>
+      	<div class="col-lg-10">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-2">
+        	<div class="radio">
+        		<%= f.radio_button :payment_method, :クレジットカード %>
+            <%= f.label :payment_method, "クレジットカード" %>
+        	</div>
+        </div>
+      	<div class="col-lg-9">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-2">
+        	<div class="radio">
+        		<%= f.radio_button :payment_method, :銀行振込 %>
+            <%= f.label :payment_method, "銀行振込" %>
+        	</div>
+        </div>
+      	<div class="col-lg-9">
+        </div>
+      </div>
+
+    <div class="form-group">
+      <div class="row">
+      	<label class="col-lg-2 control-label" for="address"><strong>お届け先</strong></label>
+      	<div class="col-lg-10">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-4">
+        	<div class="radio">
+        		<label>
+        		<%= f.radio_button :address_select, :ご自身の住所 %>ご自身の住所<br>
+              <%= f.label :postal_code, "#{@customer.postal_code}" %>
+              <%= f.label :address, "#{@customer.address}" %><br>
+              <%= f.label :last_name, "#{@customer.last_name}" %><%= f.label :first_name, "#{@customer.first_name}" %>
+            </label>
+        	</div>
+        </div>
+        <div class="col-lg-7">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-1">
+        </div>
+        <div class="col-lg-10">
+        	<div class="radio">
+        		<%= f.radio_button :address_select, :登録済住所から選択 %> 登録済住所から選択<br>
+        		<%= collection_select(:address_info, :address_id, current_customer.addresses.all, :id, :full_address, prompt: "登録済住所から選択" ) %>
+        	</div>
+        </div>
+        <div class="col-lg-1">
+        </div>
+      </div>
+
+
+      <form class="form-horizontal">
+      	<div class="form-group">
+          <div class="row">
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-10">
+            	<div class="radio">
+        		    <%= f.radio_button :address_select, :新しいお届け先 %>新しいお届け先
+        	    </div>
+        	    <div id="form">
+        		<%#= fields_for :address do |a| %>  <!-- https://qiita.com/kouuuki/items/5daf2b5f34273d8457f7 -->
+        		<%#= form_with model: @order, url:orders_path, local:true do |f| %>
+            	<div class="form-group">
+            		<p>郵便番号</p>
+            			<%= f.text_field :postal_code, autofocus: true %>
+            	</div>
+
+            	<div class="form-group">
+            		<p>住所</p>
+            			<%= f.text_field :address, autofocus: true %>
+            	</div>
+
+            	<div class="form-group">
+            		<p>宛名</p>
+            		<div>
+            			<%= f.text_field :name, autofocus: true %>
+            		</div>
+            	</div>
+          	</div>
+          <div class="col-lg-1">
+          </div>
+        </div>
+      </form>
+        <%# end %>
+        <div class="text-center">
+        	<%= f.submit '確認画面へ進む', class:"btn btn-success" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

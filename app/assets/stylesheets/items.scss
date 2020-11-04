@@ -1,0 +1,27 @@
+// Place all the styles related to the items controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.list-wrap{                    // https://teratail.com/questions/104055
+  display: block;
+  margin: 5px;
+  padding: 10px;
+  background-color: #ffffff;
+  width: 100%;
+}
+.item-box{
+  display: inline-block;
+}
+
+.genre_style{
+  border: solid;
+}
+
+.genre_title{
+  border-bottom: solid;
+}
+
+.genre-list{
+  height: 100px;
+  line-height: normal;
+}

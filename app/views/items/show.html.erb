@@ -1,0 +1,62 @@
+ <%= render "layouts/header" %>
+
+<section class="hero is-success">
+  <div class="hero-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-2">
+          <div class="genre_style">
+            <div class="genre_title">
+              <h4>ジャンル検索</h4>
+            </div>
+            <if genre.status == true>
+            <div class="genre_contents">
+              <% @genres.each do |genre| %> <!-- https://web-camp.io/magazine/archives/18333 -->
+                <div class="genre-list">
+                  <%= link_to root_path(genre: genre.id) do %>
+                    <%= genre.name %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-1">
+        </div>
+        
+        <div class="col-lg-9">
+          <div class="row">
+            <div class="col-lg-5">
+              <%= attachment_image_tag @item, :image, :fill, 300, 200, format: 'jpeg' %>
+            </div>
+            <div class="col-lg-7">
+              <h2 class="item_title"><strong><%= @item.name %></strong></h2>
+              <p><%= @item.introduction %></p>
+              <span class="item-price">
+                <h4>￥<%= ((@item.price * 1.1).round(2)).ceil %>
+                <span>(税込)</span>
+                </h4>
+              </span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-9">
+            </div>
+              <%= form_with model: @cart_item, local:true do |f| %>
+          		<%= f.hidden_field :item_id %>
+          	<div class="col-lg-1">
+          		<%= f.select :amount, [1,2,3,4,5,6,7,8,9,10] %>
+            </div>
+            <div class="col-lg-2">
+          		<%= f.submit "カートに入れる", class: 'btn btn-primary' %>
+          	</div>
+          	<% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

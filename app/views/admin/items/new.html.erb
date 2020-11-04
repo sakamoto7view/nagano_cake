@@ -1,0 +1,97 @@
+<%= render "layouts/adminheader" %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2">
+      <div style="background-color:#EAEEEF; width:190px; padding:0px" >
+        <div class="text-center">
+          <h4>商品新規登録</h4>
+        </div>
+      </div>
+      <div class="col-lg-8">
+      </div>
+      <div class="col-lg-2">
+      </div>
+    </div>
+  </div>
+<!-- form_with部分 -->
+  <%= form_with model: @item, url:'/admin/items', local:true do |f| %>
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="form-group">
+        <%= f.attachment_field :image %>
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <div class="row">
+        <div class="col-lg-2">
+          <div class="form-group">
+            <h4>商品名</h4>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <%= f.text_field :name %>
+        </div>
+        <div class="col-lg-4">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-2">
+          <div class="form-group">
+            <h4>商品説明</h4>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <%= f.text_area :introduction %>
+        </div>
+        <div class="col-lg-4">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-2">
+          <div class="form-group">
+            <h4>ジャンル</h4>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <%= f.collection_select :genre_id, Genre.where(is_active: true), :id, :name %> <!-- https://qiita.com/tanaka7014/items/efbba49e9b9d27feb5d0 https://pikawaka.com/rails/where-->
+        </div>
+        <div class="col-lg-4">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-2">
+          <div class="form-group">
+            <h4>税抜価格</h4>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <%= f.text_field :price %> 円
+        </div>
+        <div class="col-lg-4">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-2">
+          <div class="form-group">
+            <h4>販売<br>ステータス</h4>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <%= f.select :is_active,{販売中:true, 販売停止:false} %>
+        </div>
+        <div class="col-lg-4">
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-lg-10">
+      </div>
+      <div class="col-lg-2">
+        <%= f.submit '新規登録' %>
+      </div>
+    </div>
+  <% end %>
+</div>
+

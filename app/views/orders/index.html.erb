@@ -1,0 +1,66 @@
+ <%= render "layouts/header" %>
+
+<div class="container">  <!-- この行を追加 -->
+  <div class="row">      <!-- この行を追加 -->
+    <div class="col-lg-2">
+      <div style="background-color:#EAEEEF; width:120px; padding:0px">
+        <div class="text-center">
+          <h4>注文履歴一覧</h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-10">
+    </div>
+  </div>
+
+
+    <table class="table table-bordered">
+      <thead>
+    		<tr>
+    			<th>注文日</th>
+    			<th>配送先</th>
+    			<th>注文商品</th>
+    			<th>支払金額</th>
+    			<th>ステータス</th>
+    			<th>注文詳細</th>
+    		</tr>
+    	</thead>
+      <tbody>
+        <% @orders.each do |order| %>
+        <tr>
+    	    <td>
+    	      <%= order.created_at.strftime('%Y年%m月%d日') %> <!-- https://www.sejuku.net/blog/44796 -->
+    	    </td>
+    	    <td>
+    	      〒<%= order.postal_code %><br>
+    	      <%= order.address %><br>
+    	      <%= order.name %>
+          </td>
+          <td>
+            <% @sum = 0 %>
+            <% order.order_details.each do |order_detail| %>
+              <%= order_detail.item.name %>
+            <% end %>
+          </td>
+          <td>
+            <% order.order_details.each do |order_detail| %>
+            <% @sum += order_detail.pay %>
+            <% end %>
+            <%= ((@sum * 1.1).round(2)).ceil %>
+            円
+          </td>
+          <td>
+            <%= order.status %>
+          </td>
+          <td>
+            <%= link_to order_path(order) do %>
+              <button class="btn btn-info">表示する</button>
+            <% end %>
+          </td>
+    		</tr>
+    		<% end %>
+    	</tbody>
+    </table>
+
+  </div>
+</div>
